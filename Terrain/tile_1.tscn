@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://byx5cxjpgc7rs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iecnj"]
+albedo_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lsdvl"]
+material = SubResource("StandardMaterial3D_iecnj")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4b5b8"]
+points = PackedVector3Array(-2.03175, -0.0817274, -2.03175, 2.03173, 0.108712, 2.03175, 2.03173, -0.0817274, 2.03175, 2.03173, 0.108712, -2.03175, -2.03175, 0.108712, 2.03175, -2.03175, -0.0817274, 2.03175, 2.03173, -0.0817274, -2.03175, -2.03175, 0.108712, -2.03175)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdq3j"]
+albedo_color = Color(0.533333, 0.533333, 0.533333, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q6m6v"]
+material = SubResource("StandardMaterial3D_jdq3j")
+size = Vector3(4.2, 4, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v8g67"]
+points = PackedVector3Array(-2.13333, -2.03333, -0.0833333, 2.09836, 2, 0.0489071, 2.13333, 2.03333, -0.0833333, 2.13333, -2.03333, -0.0833333, -2.13333, 2.03333, -0.0833333, -2.09836, -2, 0.0489071, 2.09836, -2, 0.0489071, -2.09836, 2, 0.0489071)
+
+[node name="Tile1" type="StaticBody3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_lsdvl")
+
+[node name="Floor_CS" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_4b5b8")
+
+[node name="N" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, -1.9)
+mesh = SubResource("BoxMesh_q6m6v")
+
+[node name="N_CS" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, -1.9)
+shape = SubResource("ConvexPolygonShape3D_v8g67")

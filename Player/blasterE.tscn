@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bov5nxjktllo1"]
+[gd_scene load_steps=13 format=3 uid="uid://bov5nxjktllo1"]
 
 [ext_resource type="Script" path="res://Player/blasterE.gd" id="1_wqgvq"]
 [ext_resource type="ArrayMesh" uid="uid://cmqo12agxcmsl" path="res://Assets/muzzleflash.obj" id="2_2sxdr"]
@@ -144,6 +144,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_paode")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kblm"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_45087"]
+material = SubResource("StandardMaterial3D_5kblm")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 30.0
+
 [node name="Blaster" type="Node3D"]
 script = ExtResource("1_wqgvq")
 
@@ -172,5 +184,13 @@ omni_attenuation = 1.6245
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="Aim" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0474837, 0.701828)
+target_position = Vector3(0, 0, 10)
+
+[node name="Laser" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 15.68)
+mesh = SubResource("CylinderMesh_45087")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

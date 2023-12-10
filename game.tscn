@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx6xd3sxcxjd1"]
+[gd_scene load_steps=8 format=3 uid="uid://cx6xd3sxcxjd1"]
 
 [ext_resource type="PackedScene" uid="uid://1n5x64xjmsxg" path="res://Player/player.tscn" id="1_malgg"]
 [ext_resource type="PackedScene" uid="uid://bqg8a4xptb63p" path="res://Terrain/terrain.tscn" id="2_74qr2"]
+[ext_resource type="PackedScene" uid="uid://82bgm0abfm6w" path="res://Terrain/maze.tscn" id="3_tkl53"]
+[ext_resource type="Script" path="res://Terrain/Sculpture.gd" id="4_j15aq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ny3iy"]
 
@@ -16,13 +18,26 @@ ambient_light_source = 3
 [node name="Game" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.863633, 0.504121, 0, -0.504121, 0.863633, -0.00862837, 1.42786, 1.87906)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3.73362, 30, 22.3508)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ts2d3")
 
 [node name="Player" parent="." instance=ExtResource("1_malgg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.831758, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.687, 0.831758, 35.9879)
 
 [node name="Terrain" parent="." instance=ExtResource("2_74qr2")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Maze" parent="." instance=ExtResource("3_tkl53")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 18.8129, -0.243501, 16.6184)
+
+[node name="Sculpture" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6264, 0.464925, -13.4885)
+use_collision = true
+script = ExtResource("4_j15aq")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Sculpture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0420055)
+operation = 2
+radius = 0.613541
