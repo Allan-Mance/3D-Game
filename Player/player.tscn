@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://1n5x64xjmsxg"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_d86wh"]
+[ext_resource type="PackedScene" uid="uid://bov5nxjktllo1" path="res://Player/blasterE.tscn" id="2_ded0e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7hmw2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rdybi"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0aacu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ydsgi"]
+size = Vector3(1, 0.2, 1)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_d86wh")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+mesh = SubResource("CapsuleMesh_7hmw2")
+
+[node name="Feet" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.992097, 0)
+mesh = SubResource("BoxMesh_rdybi")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+current = true
+
+[node name="Weapon" type="Node3D" parent="Pivot"]
+
+[node name="Blaster" parent="Pivot/Weapon" instance=ExtResource("2_ded0e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.368106, -0.307954, -0.419127)
+
+[node name="Body_Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72431, 0)
+shape = SubResource("CapsuleShape3D_0aacu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.990279, 0)
+shape = SubResource("BoxShape3D_ydsgi")
