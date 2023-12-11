@@ -14,6 +14,8 @@ size = Vector3(1, 0.2, 1)
 size = Vector3(1, 0.2, 1)
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_d86wh")
 
 [node name="Body" type="MeshInstance3D" parent="."]
@@ -31,9 +33,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 current = true
 
 [node name="Weapon" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686552, 1.24619, 0.308271)
 
 [node name="Blaster" parent="Pivot/Weapon" instance=ExtResource("2_ded0e")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.368106, -0.307954, -0.419127)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0295218, -1.94795, -0.419127)
 
 [node name="Body_Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72431, 0)
@@ -42,3 +45,7 @@ shape = SubResource("CapsuleShape3D_0aacu")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.990279, 0)
 shape = SubResource("BoxShape3D_ydsgi")
+
+[node name="Pickup_Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Pickup_Timer" to="." method="_on_pickup_timer_timeout"]

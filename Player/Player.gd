@@ -4,6 +4,9 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = .001
+var health = 5
+
+var can_drop = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -16,6 +19,10 @@ func _unhandled_input(event):
 		$Pivot.rotate_x(-event.relative.y*MOUSE_SENSITIVITY)
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -.5, 0.25)
 		rotate_y(-event.relative.x*MOUSE_SENSITIVITY)
+	if event.is_action_pressed("pickup") and can_drop:
+		for w in $Pivot/Weapon.get_children():
+			if w.has_method("drop"):
+				w.drop()
 
 
 func _physics_process(delta):
@@ -45,3 +52,24 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+	
+func pickup(weapon):
+	can_drop = false
+	$Pickup_Timer.start()
+	$Pivot/Weapon.add_child(weapon)
+
+
+func _on_pickup_timer_timeout():
+	can_drop = true
+
+
+
+func damage():
+	health -= 1
+	if health <= 0:
+		get_tree().change_scene_to_file("res://UI/end_game.tscn")
+
+
+func _on_button_pressed():
+	pass # Replace with function body.
